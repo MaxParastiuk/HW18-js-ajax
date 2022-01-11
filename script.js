@@ -28,7 +28,7 @@ function showTodos(todos) {
     let li = ul.appendChild(document.createElement('li'))
     let lis = '';
     todos.forEach(function (todo) {
-        li.innerHTML = todo.task ;
+        li.innerHTML = todo.task;
         let doneOrNot = todo.complited ? "done" : "not-done";
         lis += `<li class="${doneOrNot}" data-id="${todo.id}">${todo.task}<button class="set-status">Change status</button><button class="delete-task">Delete</button></li>`;
     })
@@ -55,7 +55,7 @@ function postJSON(url, data) {
     });
 }
 
-function patchJSON(url,dataId,status) {
+function patchJSON(url, dataId, status) {
     return new Promise(function (resolve, reject) {
         let xhr = new XMLHttpRequest();
 
@@ -79,7 +79,7 @@ function patchJSON(url,dataId,status) {
     })
 }
 
-function deleteJSON(url,dataId) {
+function deleteJSON(url, dataId) {
     return new Promise(function (resolve, reject) {
         let xhr = new XMLHttpRequest();
 
@@ -123,7 +123,7 @@ ul.addEventListener('click', (event) => {
     let dataId = event.target.closest('[data-id]').dataset.id;
     let trueStatus = event.target.closest('li').classList.contains('done')
     if (event.target.className === 'set-status') {
-        patchJSON('http://localhost:3000/todos', dataId,trueStatus)
+        patchJSON('http://localhost:3000/todos', dataId, trueStatus)
             .then(function (data) {
                 console.log('Success ', data);
             }, function (status) {
@@ -132,7 +132,7 @@ ul.addEventListener('click', (event) => {
         location.reload();
     }
     if (event.target.className === 'delete-task') {
-        deleteJSON('http://localhost:3000/todos',dataId)
+        deleteJSON('http://localhost:3000/todos', dataId)
             .then(function (data) {
                 console.log('Success ', data);
             }, function (status) {
